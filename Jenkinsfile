@@ -9,7 +9,7 @@ pipeline {
     stage('Compile') {
       steps {
         tool(name: 'gradle-4.10.2', type: 'gradle')
-        sh 'sh "${GRADLE_HOME}/bin/gradle build"'
+        sh 'sh "gradle build"'
       }
     }
   }
