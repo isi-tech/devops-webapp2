@@ -1,21 +1,9 @@
 pipeline {
-  agent {
-    docker {
-      image 'gradle:4.10.2-jdk8'
-    }
-
-  }
+  agent any
   stages {
-    stage('Checkout') {
+    stage('') {
       steps {
-        git(url: 'https://github.com/jeremycook123/devops-webapp2.git', branch: 'master')
-      }
-    }
-    stage('Info') {
-      steps {
-        sh '''echo BUILD_ID = $BUILD_ID
-echo JENKINS_URL = $JENKINS_URL
-echo PATH = $PATH'''
+        tool(name: 'gradle', type: 'blah')
       }
     }
   }
