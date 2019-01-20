@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('Test') {
       steps {
-        tool(name: 'gradle', type: 'blah')
+        tool(name: 'gradle', type: 'gradle-4.10.2')
       }
     }
   }
