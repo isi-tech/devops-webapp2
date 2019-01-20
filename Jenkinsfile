@@ -9,11 +9,12 @@ pipeline {
     stage('Compile') {
       steps {
         tool(name: 'gradle-4.10.2', type: 'gradle')
-        sh '''date
+        sh '''whoami
+date
 echo $PATH
 pwd
 ls -la
-./gradle build'''
+sudo ./gradle build'''
       }
     }
   }
