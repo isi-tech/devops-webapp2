@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Details') {
+    stage('Checkout') {
       steps {
-        sh 'echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"'
+        git(url: 'https://github.com/jeremycook123/devops-webapp2.git', branch: 'master')
       }
     }
   }
