@@ -13,7 +13,7 @@ pipeline {
 echo $PATH
 pwd
 ls -la
-gradle build'''
+./gradle build'''
       }
     }
   }
