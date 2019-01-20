@@ -9,7 +9,8 @@ pipeline {
     stage('Compile') {
       steps {
         tool(name: 'gradle-4.10.2', type: 'gradle')
-        sh 'which gradle'
+        sh '''date
+echo $PATH'''
       }
     }
   }
