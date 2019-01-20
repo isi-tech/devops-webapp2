@@ -6,5 +6,10 @@ pipeline {
         git(url: 'https://github.com/jeremycook123/devops-webapp2.git', branch: 'master')
       }
     }
+    stage('Compile') {
+      steps {
+        sh 'gradle build'
+      }
+    }
   }
 }
