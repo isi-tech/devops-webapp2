@@ -10,7 +10,10 @@ pipeline {
       steps {
         tool(name: 'gradle-4.10.2', type: 'gradle')
         sh '''date
-echo $PATH'''
+echo $PATH
+pwd
+ls -la
+'''
       }
     }
   }
