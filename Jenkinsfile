@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        tool(name: 'gradle', type: 'gradle-4.10.2')
+        tool(name: 'gradle-4.10.2', type: 'gradle')
       }
     }
   }
