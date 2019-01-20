@@ -14,7 +14,9 @@ date
 echo $PATH
 pwd
 ls -la
-sudo ./gradle build'''
+cd gradle
+ls -la
+'''
       }
     }
   }
