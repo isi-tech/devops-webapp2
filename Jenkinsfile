@@ -8,8 +8,8 @@ pipeline {
     }
     stage('Compile') {
       steps {
-        sh 'gradle build'
         tool(name: 'gradle', type: 'gradle-4.10.2')
+        sh 'gradle build'
       }
     }
   }
