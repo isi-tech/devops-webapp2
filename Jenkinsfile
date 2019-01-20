@@ -8,7 +8,6 @@ pipeline {
     }
     stage('Compile') {
       steps {
-        tool(name: 'gradle-4.10.2', type: 'gradle')
         sh '''whoami
 date
 echo $PATH
