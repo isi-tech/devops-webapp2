@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'agent2'
+    }
+
+  }
   stages {
     stage('Checkout') {
       steps {
@@ -7,12 +12,6 @@ pipeline {
       }
     }
     stage('Compile') {
-      agent {
-        node {
-          label 'agent1'
-        }
-
-      }
       steps {
         sh '''whoami
 date
@@ -26,16 +25,6 @@ ls -la build/libs/'''
       }
     }
     stage('Docker') {
-      agent {
-        node {
-          label 'agent1'
-        }
-
-      }
-      environment {
-        DOCKER_USERNAME = 'aaaaa'
-        DOCKER_PASSWORD = 'bbbbbb'
-      }
       steps {
         unstash 'App'
         sh '''pwd
@@ -49,24 +38,18 @@ ls -la
         sh '''cd ./docker
 pwd
 ls -la
-docker build -t jeremycookdev/webapp1-2019:latest .
+docker build -t jeremycookdev/webapp1-2019:$BUILD_ID .
 docker images
 '''
       }
     }
     stage('Auth') {
-      agent {
-        node {
-          label 'agent1'
-        }
-
-      }
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             sh '''
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push jeremycookdev/webapp1-2019:latest
+docker push jeremycookdev/webapp1-2019:$BUILD_ID
 '''
           }
         }
