@@ -20,7 +20,6 @@ echo $PATH
 pwd
 ls -la
 ./gradlew build'''
-        stash(name: 'WAR', includes: 'build/libs/*.war')
       }
     }
     stage('Docker') {
@@ -36,7 +35,6 @@ cd ./docker
 pwd
 ls -la
 '''
-        unstash 'WAR'
         sh '''cd ./docker
 pwd
 ls -la
