@@ -51,11 +51,10 @@ pwd
 ls -la
 docker build -t webapp1:latest .
 docker images
-docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push webapp1:latest'''
+'''
       }
     }
-    stage('') {
+    stage('Auth') {
       steps {
         script {
           withCredentials([usernameColonPassword(credentialsId: 'mylogin', variable: 'USERPASS')]) {
