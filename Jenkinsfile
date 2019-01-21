@@ -36,7 +36,8 @@ pwd
 ls -la
 '''
         unstash 'WAR'
-        sh '''pwd
+        sh '''cd ./docker
+pwd
 ls -la
 docker build -t webapp1:latest .'''
       }
