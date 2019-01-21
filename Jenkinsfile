@@ -24,7 +24,7 @@ ls -la
     }
     stage('Docker') {
       steps {
-        tool(type: 'docker', name: 'docker-latest')
+        tool(type: 'Docker', name: 'docker-latest')
       }
     }
   }
