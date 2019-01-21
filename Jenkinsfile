@@ -7,6 +7,12 @@ pipeline {
       }
     }
     stage('Compile') {
+      agent {
+        node {
+          label 'agent1'
+        }
+
+      }
       steps {
         sh '''whoami
 date
@@ -18,6 +24,12 @@ ls -la
       }
     }
     stage('Deploy') {
+      agent {
+        node {
+          label 'agent1'
+        }
+
+      }
       steps {
         unstash 'WAR'
       }
