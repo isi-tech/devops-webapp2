@@ -38,7 +38,7 @@ ls -la
         sh '''cd ./docker
 pwd
 ls -la
-docker build -t jeremycookdev/webapp1-2019:$BUILD_ID .
+docker build -t cloudacademydevops/webapp1-2019:$BUILD_ID .
 docker images
 '''
       }
@@ -46,10 +46,10 @@ docker images
     stage('Publish') {
       steps {
         script {
-          withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+          withCredentials([usernamePassword(credentialsId: 'ca-dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             sh '''
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push jeremycookdev/webapp1-2019:$BUILD_ID
+docker push cloudacademydevops/webapp1-2019:$BUILD_ID
 '''
           }
         }
