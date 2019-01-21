@@ -32,6 +32,10 @@ ls -la build/libs/'''
         }
 
       }
+      environment {
+        DOCKER_USERNAME = 'aaaaa'
+        DOCKER_PASSWORD = 'bbbbbb'
+      }
       steps {
         unstash 'App'
         sh '''pwd
@@ -46,7 +50,9 @@ ls -la
 pwd
 ls -la
 docker build -t webapp1:latest .
-docker images'''
+docker images
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+docker push webapp1:latest'''
       }
     }
   }
