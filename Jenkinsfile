@@ -40,7 +40,8 @@ ls -la
         sh '''cd ./docker
 pwd
 ls -la
-docker build -t webapp1:latest .'''
+docker build -t webapp1:latest .
+docker images'''
       }
     }
   }
