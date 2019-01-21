@@ -19,7 +19,8 @@ date
 echo $PATH
 pwd
 ls -la
-./gradlew build'''
+./gradlew build
+ls -la'''
       }
     }
     stage('Docker') {
@@ -30,7 +31,9 @@ ls -la
 
       }
       steps {
-        sh '''cp ./build/libs/*.war ./docker
+        sh '''pwd
+ls -la
+cp ./build/libs/*.war ./docker
 cd ./docker
 pwd
 ls -la
