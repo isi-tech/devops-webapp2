@@ -24,7 +24,7 @@ ls -la build/libs/'''
         stash(name: 'App', includes: 'build/libs/*.war')
       }
     }
-    stage('Docker') {
+    stage('Package') {
       steps {
         unstash 'App'
         sh '''pwd
@@ -38,18 +38,18 @@ ls -la
         sh '''cd ./docker
 pwd
 ls -la
-docker build -t jeremycookdev/webapp1-2019:latest .
+docker build -t jeremycookdev/webapp1-2019:$BUILD_ID .
 docker images
 '''
       }
     }
-    stage('Auth') {
+    stage('Publish') {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             sh '''
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push jeremycookdev/webapp1-2019:latest
+docker push jeremycookdev/webapp1-2019:$BUILD_ID
 '''
           }
         }
