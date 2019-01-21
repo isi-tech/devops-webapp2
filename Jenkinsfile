@@ -23,25 +23,6 @@ ls -la
         stash(name: 'WAR', includes: 'build/libs/*.war')
       }
     }
-    stage('Deploy') {
-      agent {
-        node {
-          label 'agent1'
-        }
-
-      }
-      steps {
-        sh '''cd ./docker
-pwd
-ls -la
-'''
-        unstash 'WAR'
-        sh '''cd ./docker
-pwd
-ls -la
-docker build -t webapp1:latest .'''
-      }
-    }
     stage('Docker') {
       agent {
         node {
@@ -50,7 +31,16 @@ docker build -t webapp1:latest .'''
 
       }
       steps {
-        sh 'docker ps'
+        sh '''cp ./build/libs/*.war ./docker
+cd ./docker
+pwd
+ls -la
+'''
+        unstash 'WAR'
+        sh '''cd ./docker
+pwd
+ls -la
+docker build -t webapp1:latest .'''
       }
     }
   }
