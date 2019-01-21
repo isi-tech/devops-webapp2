@@ -20,7 +20,8 @@ echo $PATH
 pwd
 ls -la
 ./gradlew build
-ls -la'''
+ls -la
+ls -la build/libs/'''
       }
     }
     stage('Docker') {
@@ -33,6 +34,7 @@ ls -la'''
       steps {
         sh '''pwd
 ls -la
+ls -la ./build/libs/
 cp ./build/libs/*.war ./docker
 cd ./docker
 pwd
