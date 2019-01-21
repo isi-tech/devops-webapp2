@@ -22,5 +22,10 @@ ls -la
         unstash 'WAR'
       }
     }
+    stage('Docker') {
+      steps {
+        tool(type: 'docker', name: 'docker')
+      }
+    }
   }
 }
