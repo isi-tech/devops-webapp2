@@ -22,6 +22,7 @@ ls -la
 ./gradlew build
 ls -la
 ls -la build/libs/'''
+        stash(name: 'App', includes: 'build/libs/*.war')
       }
     }
     stage('Docker') {
@@ -32,6 +33,7 @@ ls -la build/libs/'''
 
       }
       steps {
+        unstash 'App'
         sh '''pwd
 ls -la
 ls -la ./build/libs/
