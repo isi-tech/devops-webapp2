@@ -55,5 +55,18 @@ docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 docker push webapp1:latest'''
       }
     }
+    stage('') {
+      steps {
+        script {
+          withCredentials([usernameColonPassword(credentialsId: 'mylogin', variable: 'USERPASS')]) {
+            sh '''
+set +x
+curl -u "$USERPASS" https://private.server/ > output
+'''
+          }
+        }
+
+      }
+    }
   }
 }
