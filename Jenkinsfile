@@ -55,12 +55,17 @@ docker images
       }
     }
     stage('Auth') {
+      agent {
+        node {
+          label 'agent1'
+        }
+
+      }
       steps {
         script {
-          withCredentials([usernameColonPassword(credentialsId: 'mylogin', variable: 'USERPASS')]) {
+          withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             sh '''
-set +x
-curl -u "$USERPASS" https://private.server/ > output
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 '''
           }
         }
