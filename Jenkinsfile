@@ -39,6 +39,7 @@ ls -la
 pwd
 ls -la
 docker build -t cloudacademydevops/webapp1-2019:$BUILD_ID .
+docker tag cloudacademydevops/webapp1-2019:$BUILD_ID cloudacademydevops/webapp1-2019:latest
 docker images
 '''
       }
@@ -50,6 +51,7 @@ docker images
             sh '''
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 docker push cloudacademydevops/webapp1-2019:$BUILD_ID
+docker push cloudacademydevops/webapp1-2019:latest
 '''
           }
         }
