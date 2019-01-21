@@ -38,7 +38,7 @@ ls -la
         sh '''cd ./docker
 pwd
 ls -la
-docker build -t jeremycookdev/webapp1-2019:$BUILD_ID .
+docker build -t jeremycookdev/webapp1-2019:latest .
 docker images
 '''
       }
@@ -49,7 +49,7 @@ docker images
           withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
             sh '''
 docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-docker push jeremycookdev/webapp1-2019:$BUILD_ID
+docker push jeremycookdev/webapp1-2019:latest
 '''
           }
         }
