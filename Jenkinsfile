@@ -23,8 +23,14 @@ ls -la
       }
     }
     stage('Docker') {
+      agent {
+        node {
+          label 'agent1'
+        }
+
+      }
       steps {
-        tool(type: 'Docker', name: 'docker-latest')
+        sh 'docker ps'
       }
     }
   }
