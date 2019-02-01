@@ -20,7 +20,7 @@ date
 echo $PATH
 pwd
 ls -la
-./gradlew build --info'''
+./gradlew build -PwarName=webapp.war --info'''
           }
         }
         stage('P1') {

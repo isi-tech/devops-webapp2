@@ -36,3 +36,7 @@ dependencies {
     runtime 'com.fasterxml.jackson.core:jackson-databind:2.9.3'
     runtime 'com.github.docker-java:docker-java:3.0.14'
 }
+
+war {
+    archiveName = project.property('warName')
+}
