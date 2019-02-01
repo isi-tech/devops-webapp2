@@ -38,5 +38,9 @@ dependencies {
 }
 
 war {
-    archiveName = project.property('warName')
+    if (project.hasProperty('warName')){
+        archiveName = project.property('warName')
+    } else{
+        archiveName = 'webapp.war'
+    }    
 }
