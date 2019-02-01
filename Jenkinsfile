@@ -15,12 +15,12 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh '''whoami
-date
-echo $PATH
+            sh '''RELEASE=webapp.war
 pwd
-ls -la
-./gradlew build -PwarName=webapp.war --info'''
+./gradlew build -PwarName=$RELEASE --info
+ls -la build/libs/
+cp ./build/libs/$RELEASE ./docker
+'''
           }
         }
         stage('P1') {
@@ -37,9 +37,28 @@ echo run parallel!!'''
         }
       }
     }
+    stage('Packaging') {
+      steps {
+        sh '''pwd
+cd ./docker
+docker build -t cloudacademydevops/webapp1-2019:$BUILD_ID .
+docker tag cloudacademydevops/webapp1-2019:$BUILD_ID cloudacademydevops/webapp1-2019:latest
+docker images
+'''
+      }
+    }
     stage('Publish') {
       steps {
-        archiveArtifacts(artifacts: 'build/libs/*.war', fingerprint: true, onlyIfSuccessful: true)
+        script {
+          withCredentials([usernamePassword(credentialsId: 'ca-dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]){
+            sh '''
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+docker push cloudacademydevops/webapp1-2019:$BUILD_ID
+docker push cloudacademydevops/webapp1-2019:latest
+'''
+          }
+        }
+
       }
     }
   }
